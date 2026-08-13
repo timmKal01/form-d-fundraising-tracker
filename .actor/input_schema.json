@@ -1,0 +1,37 @@
+{
+    "title": "Startup Fundraising Tracker Input",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "keyword": {
+            "title": "Keyword (optional)",
+            "type": "string",
+            "editor": "textfield",
+            "description": "Free-text search across filings (e.g. a company name or industry term). Leave blank to return all new Form D filings."
+        },
+        "states": {
+            "title": "States (optional)",
+            "type": "array",
+            "editor": "stringList",
+            "description": "Two-letter state codes to filter by business location (e.g. \"CA\", \"NY\"). Leave empty for nationwide."
+        },
+        "daysBack": {
+            "title": "Days back",
+            "type": "integer",
+            "editor": "number",
+            "description": "How many days back from today to include, by filing date.",
+            "default": 7,
+            "minimum": 1,
+            "maximum": 90
+        },
+        "maxResults": {
+            "title": "Max results",
+            "type": "integer",
+            "editor": "number",
+            "description": "Maximum number of filings to return, most recently filed first.",
+            "default": 50,
+            "minimum": 1,
+            "maximum": 100
+        }
+    }
+}
