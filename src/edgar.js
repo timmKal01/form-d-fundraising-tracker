@@ -1,6 +1,35 @@
 const UA = 'FormDFundraisingTracker/0.1 (contact: formd-tracker-admin@example.com)';
 const API_URL = 'https://efts.sec.gov/LATEST/search-index';
 
+const TRANSIENT_STATUSES = new Set([429, 500, 502, 503, 504]);
+const MAX_ATTEMPTS = 4;
+
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/** Retries transient failures (rate limits, upstream 5xx) instead of failing the whole run on one hiccup. */
+async function secFetch(url, options) {
+    let lastError;
+    for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+        let res;
+        try {
+            res = await fetch(url, options);
+        } catch (err) {
+            lastError = err;
+            if (attempt < MAX_ATTEMPTS) await sleep(1000 * 2 ** (attempt - 1));
+            continue;
+        }
+        if (res.ok) return res;
+        if (!TRANSIENT_STATUSES.has(res.status)) {
+            throw new Error(`SEC EDGAR full text search failed: ${res.status}`);
+        }
+        lastError = new Error(`SEC EDGAR full text search failed: ${res.status}`);
+        if (attempt < MAX_ATTEMPTS) await sleep(1000 * 2 ** (attempt - 1));
+    }
+    throw lastError;
+}
+
 function cleanCompanyName(displayName) {
     return (displayName ?? '').replace(/\s*\(CIK\s*\d+\)\s*$/i, '').trim();
 }
@@ -14,9 +43,7 @@ export async function fetchFilings({ keyword, states, startDate, maxResults }) {
     url.searchParams.set('enddt', new Date().toISOString().slice(0, 10));
     if (states?.length) url.searchParams.set('locationCodes', states.map((s) => s.toUpperCase()).join(','));
 
-    const res = await fetch(url, { headers: { 'User-Agent': UA, Accept: 'application/json' } });
-    if (!res.ok) throw new Error(`SEC EDGAR full text search failed: ${res.status}`);
-
+    const res = await secFetch(url, { headers: { 'User-Agent': UA, Accept: 'application/json' } });
     const data = await res.json();
     const hits = data.hits?.hits ?? [];
 
