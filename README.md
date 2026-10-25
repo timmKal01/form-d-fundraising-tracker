@@ -65,5 +65,4 @@ search returns 1 filing or 100.
 
 ## Related products
 
-- [Company Buying Signals](https://apify.com/m_ctim/company-buying-signal-report): once you know who raised money, check their hiring activity for a fuller buying signal
 - [SEC 8-K Tracker](https://apify.com/m_ctim/sec-8k-material-event-tracker): the public-company equivalent: material events from public filings
