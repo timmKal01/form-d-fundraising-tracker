@@ -33,6 +33,7 @@ One record per filing:
 
 ```json
 {
+  "rowType": "filing",
   "companyName": "GTCR Fund XV/B LP",
   "cik": "0002141706",
   "filingDate": "2026-08-06",
