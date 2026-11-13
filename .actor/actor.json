@@ -1,8 +1,8 @@
 {
     "actorSpecification": 1,
     "name": "form-d-fundraising-tracker",
-    "title": "Startup Funding Tracker: New SEC Form D Filings",
-    "description": "Track new SEC Form D filings — the mandatory disclosure private companies file when they raise money. Search by keyword or state, get the company, filing date, location, and a link to the filing. For VCs, journalists, and sales teams who want to know who just raised money before it's public news.",
+    "title": "Startup Funding Tracker: Recently Funded Companies (Form D)",
+    "description": "Companies that just raised money, from new SEC Form D filings: amount raised, investors, industry, exemption, first-sale date, executives, and the company's phone and address. Investment funds are filtered out, so you get operating companies. Filter by state, industry and amount.",
     "version": "0.1",
     "meta": {
         "templateId": "custom-no-proxy"

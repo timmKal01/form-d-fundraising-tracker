@@ -6,50 +6,94 @@
             "title": "Overview",
             "transformation": {
                 "fields": [
+                    "rowType",
                     "companyName",
-                    "cik",
                     "filingDate",
+                    "industry",
                     "state",
-                    "location",
-                    "incorporatedIn",
-                    "accessionNumber",
-                    "filingUrl"
+                    "offering.totalAmountSold",
+                    "offering.totalOfferingAmount",
+                    "investors.total",
+                    "dateOfFirstSale",
+                    "securitiesOffered",
+                    "exemptions",
+                    "yearOfIncorporation",
+                    "phone",
+                    "relatedPersons",
+                    "filingUrl",
+                    "note"
+                ],
+                "flatten": [
+                    "offering",
+                    "investors"
                 ]
             },
             "display": {
                 "component": "table",
                 "properties": {
-                    "companyName": {
-                        "label": "Company name",
+                    "rowType": {
+                        "label": "Row",
                         "format": "text"
                     },
-                    "cik": {
-                        "label": "CIK",
+                    "companyName": {
+                        "label": "Company",
                         "format": "text"
                     },
                     "filingDate": {
-                        "label": "Filing date",
+                        "label": "Filed",
+                        "format": "text"
+                    },
+                    "industry": {
+                        "label": "Industry",
                         "format": "text"
                     },
                     "state": {
                         "label": "State",
                         "format": "text"
                     },
-                    "location": {
-                        "label": "Location",
+                    "offering.totalAmountSold": {
+                        "label": "Raised so far (USD)",
+                        "format": "number"
+                    },
+                    "offering.totalOfferingAmount": {
+                        "label": "Offering size (USD)",
+                        "format": "number"
+                    },
+                    "investors.total": {
+                        "label": "Investors",
+                        "format": "number"
+                    },
+                    "dateOfFirstSale": {
+                        "label": "First sale",
                         "format": "text"
                     },
-                    "incorporatedIn": {
-                        "label": "Incorporated in",
+                    "securitiesOffered": {
+                        "label": "Securities",
+                        "format": "array"
+                    },
+                    "exemptions": {
+                        "label": "Exemptions",
+                        "format": "array"
+                    },
+                    "yearOfIncorporation": {
+                        "label": "Incorporated",
+                        "format": "number"
+                    },
+                    "phone": {
+                        "label": "Phone",
                         "format": "text"
                     },
-                    "accessionNumber": {
-                        "label": "Accession number",
-                        "format": "text"
+                    "relatedPersons": {
+                        "label": "People",
+                        "format": "array"
                     },
                     "filingUrl": {
-                        "label": "Filing URL",
+                        "label": "Filing",
                         "format": "link"
+                    },
+                    "note": {
+                        "label": "Note",
+                        "format": "text"
                     }
                 }
             }

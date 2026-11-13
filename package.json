@@ -2,14 +2,16 @@
     "name": "form-d-fundraising-tracker",
     "version": "0.1.0",
     "type": "module",
-    "description": "Track new SEC Form D private fundraising filings by keyword or state via the official EDGAR full text search API.",
+    "description": "Recently funded companies from new SEC Form D filings, with amount raised, investors, industry, executives and contact details; investment funds filtered out.",
     "engines": {
         "node": ">=18.0.0"
     },
     "dependencies": {
-        "apify": "^3.2.6"
+        "apify": "^3.2.6",
+        "fast-xml-parser": "^4.5.7"
     },
     "scripts": {
-        "start": "node src/main.js"
+        "start": "node src/main.js",
+        "test": "node --test"
     }
 }

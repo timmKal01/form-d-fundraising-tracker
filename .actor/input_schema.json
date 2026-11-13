@@ -7,19 +7,44 @@
             "title": "Keyword (optional)",
             "type": "string",
             "editor": "textfield",
-            "description": "Free-text search across filings (e.g. a company name or industry term). Leave blank to return all new Form D filings."
+            "description": "Free-text search across the filings, e.g. a company name or a word like \"software\" or \"clinic\". Leave blank for every new Form D filing."
         },
         "states": {
             "title": "States (optional)",
             "type": "array",
             "editor": "stringList",
-            "description": "Two-letter state codes to filter by business location (e.g. \"CA\", \"NY\"). Leave empty for nationwide."
+            "description": "Two-letter state codes of the company's business address, e.g. \"CA\", \"NY\". Leave empty for nationwide."
+        },
+        "industries": {
+            "title": "Industries (optional)",
+            "type": "array",
+            "editor": "stringList",
+            "description": "Keep filings whose Form D industry contains any of these, e.g. \"Technology\", \"Health Care\", \"Biotechnology\", \"Real Estate\", \"Restaurants\", \"Banking\". Leave empty for all."
+        },
+        "minAmountSold": {
+            "title": "Minimum amount raised, USD (optional)",
+            "type": "integer",
+            "editor": "number",
+            "minimum": 0,
+            "description": "Keep filings that report at least this much sold so far, e.g. 1000000."
+        },
+        "includeFunds": {
+            "title": "Include investment funds",
+            "type": "boolean",
+            "default": false,
+            "description": "Pooled investment funds (hedge, private equity, real estate funds and SPVs) are about half of all Form D filings. They're left out unless you turn this on."
+        },
+        "includeAmendments": {
+            "title": "Include amendments",
+            "type": "boolean",
+            "default": false,
+            "description": "Form D/A amends an earlier filing rather than announcing a new raise. Left out unless you turn this on."
         },
         "daysBack": {
             "title": "Days back",
             "type": "integer",
             "editor": "number",
-            "description": "How many days back from today to include, by filing date.",
+            "description": "How many days back from today to include, by filing date (1 to 90).",
             "default": 7,
             "minimum": 1,
             "maximum": 90
@@ -28,10 +53,23 @@
             "title": "Max results",
             "type": "integer",
             "editor": "number",
-            "description": "Maximum number of filings to return, most recently filed first.",
+            "description": "Maximum filings to return, newest first (1 to 500). Each filing is read in full, about 4 a second.",
             "default": 50,
             "minimum": 1,
-            "maximum": 100
+            "maximum": 500
+        },
+        "onlyNew": {
+            "title": "Only filings not returned before",
+            "type": "boolean",
+            "default": false,
+            "description": "For scheduled runs: skip filings that earlier runs with the same list name already returned."
+        },
+        "seenListName": {
+            "title": "Already-returned list name",
+            "type": "string",
+            "editor": "textfield",
+            "default": "form-d-seen",
+            "description": "The list onlyNew remembers filings in. Give each schedule or client its own name."
         }
     }
 }
